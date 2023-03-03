@@ -1,13 +1,36 @@
 import { useState } from "react";
 import styled from "styled-components"
 import flipButton from "../assets/img/seta_virar.png";
+import hit from "../assets/img/icone_certo.png";
+import doubt from "../assets/img/icone_quase.png";
+import error from "../assets/img/icone_erro.png";
 
 export default function CardFaces ({question, answer, id, completed, setCompleted, setOpened}) {
   const [isFlip, setIsFlip] = useState(false)
   
+  const icon = (answer) =>{
+    if(answer==="error"){
+      return error;
+    }else if(answer==="hit"){
+      return hit;
+    } else if(answer==="doubt"){
+      return doubt;
+    }
+  }
+
+  const test = (answer) =>{
+    if(answer==="error"){
+      return "no-icon";
+    }else if(answer==="hit"){
+      return "zap-icon";
+    } else if(answer==="doubt"){
+      return "partial-icon";
+    }
+  }
   const handleAnswer = (userAnswerColor, cardId, userAnswer) => {
     if(!completed.includes(cardId)){
-      const answer = {id : cardId, color : userAnswerColor, answer : userAnswer }
+      const answer = {id : cardId, color : userAnswerColor, answer : userAnswer, asnwerIcon : icon(userAnswer), test : test(userAnswer) }
+      console.log(answer.test)
       const completedZaps = [...completed, answer]
       console.log(completedZaps)
       setCompleted(completedZaps)
@@ -15,6 +38,8 @@ export default function CardFaces ({question, answer, id, completed, setComplete
     };
     
   }
+
+  
   return (
 
     <Faces>

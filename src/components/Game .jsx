@@ -3,13 +3,17 @@ import gameLogo from "../assets/img/logo.png"
 import FlashCards from "./FlashCards ";
 import themes from "../utils/themes";
 import { useState } from "react";
-export default function Game () {
+import Trys from "./Trys  ";
+export default function Game ({startGame}) {
   const [completed, setCompleted] = useState([]);
   return (
-    <StyledGame>
+    <StyledGame startGame = {startGame}>
       <Logo src = {gameLogo}/>
-      <FlashCards questions = {themes[0].questions} completed = {completed} setCompleted = {setCompleted}/>
-      <StyledFooter data-test="footer">{`${completed.length}/${themes[0].questions.length} CONCLUÍDOS`}</StyledFooter>
+      <FlashCards questions = {themes[0].questions} completed = {completed} setCompleted = {setCompleted} startGame={startGame}/>
+      <StyledFooter data-test="footer">
+        {`${completed.length}/${themes[0].questions.length} CONCLUÍDOS`}
+        <Trys completed = {completed}/>  
+      </StyledFooter>
     </StyledGame>
   );
 }
@@ -26,6 +30,7 @@ const StyledGame = styled.div`
   overflow: scroll;
   overflow-y: hidden;
   padding-bottom: 70px;
+  transition: all .3s;
 `
 
 const Logo = styled.img`
@@ -50,4 +55,7 @@ const StyledFooter = styled.footer`
   font-size: 18px;
   line-height: 22px;
   color: #333333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `
