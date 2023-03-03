@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import flipButton from "../assets/img/seta_virar.png";
+
 
 export default function Buttons ({opened, cardNumber, handleFlipCard, completed, img, test}){
+
   return (
-    <StyledInteraction disabled = {completed.map(answer => answer.id).includes(cardNumber) && true} onClick={() => handleFlipCard(cardNumber)} data-test="play-btn"> <img src={img} alt=""/></StyledInteraction>
+    <StyledInteraction disabled = {completed.map(answer => answer.id).includes(cardNumber) && true} onClick={() => handleFlipCard(cardNumber)} data-test="play-btn"> <img src={img} alt="" data-test = {test}/></StyledInteraction>
   )
 };
 

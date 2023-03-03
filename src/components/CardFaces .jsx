@@ -5,10 +5,11 @@ import flipButton from "../assets/img/seta_virar.png";
 export default function CardFaces ({question, answer, id, completed, setCompleted, setOpened}) {
   const [isFlip, setIsFlip] = useState(false)
   
-  const handleAnswer = (userAnswerColor, cardId) => {
+  const handleAnswer = (userAnswerColor, cardId, userAnswer) => {
     if(!completed.includes(cardId)){
-      const answer = {id : cardId, color : userAnswerColor}
+      const answer = {id : cardId, color : userAnswerColor, answer : userAnswer }
       const completedZaps = [...completed, answer]
+      console.log(completedZaps)
       setCompleted(completedZaps)
       setOpened([])
     };
@@ -31,9 +32,9 @@ export default function CardFaces ({question, answer, id, completed, setComplete
         <Answer data-test="flashcard-text">
           {answer}
           <ButtonsList>
-            <AnswerButton data-test="no-btn"  answerColor = {"#FF3030"} onClick= {() => handleAnswer("#FF3030", id)}>{"Não lembrei"}</AnswerButton>
-            <AnswerButton data-test="partial-btn" answerColor = {"#FF922E"} onClick= {() => handleAnswer("#FF922E", id)}>{"Quase não lembrei"}</AnswerButton>
-            <AnswerButton data-test="zap-btn" answerColor = {"#2FBE34"} onClick= {() => handleAnswer("#2FBE34", id)}>{"Zap!"}</AnswerButton>
+            <AnswerButton data-test="no-btn"  answerColor = {"#FF3030"} onClick= {() => handleAnswer("#FF3030", id, "error")}>{"Não lembrei"}</AnswerButton>
+            <AnswerButton data-test="partial-btn" answerColor = {"#FF922E"} onClick= {() => handleAnswer("#FF922E", id, "doubt")}>{"Quase não lembrei"}</AnswerButton>
+            <AnswerButton data-test="zap-btn" answerColor = {"#2FBE34"} onClick= {() => handleAnswer("#2FBE34", id, "hit")}>{"Zap!"}</AnswerButton>
           </ButtonsList>
         </Answer>
       </CardContent>
