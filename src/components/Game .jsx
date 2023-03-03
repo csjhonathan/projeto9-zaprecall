@@ -11,7 +11,6 @@ export default function Game () {
       <FlashCards questions = {themes[0].questions} completed = {completed} setCompleted = {setCompleted}/>
       <StyledFooter data-test="footer">{`${completed.length}/${themes[0].questions.length} CONCLUÍDOS`}</StyledFooter>
     </StyledGame>
-
   );
 }
 
