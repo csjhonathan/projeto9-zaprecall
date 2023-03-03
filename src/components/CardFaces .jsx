@@ -1,12 +1,19 @@
 import { useState } from "react";
 import styled from "styled-components"
 import flipButton from "../assets/img/seta_virar.png";
-import hit from "../assets/img/icone_certo.png";
-import error from "../assets/img/icone_erro.png";
-import doubt from "../assets/img/icone_quase.png";
-export default function CardFaces ({question, answer}) {
-  const [isFlip, setIsFlip] = useState(false)
 
+export default function CardFaces ({question, answer, id, completed, setCompleted, setOpened}) {
+  const [isFlip, setIsFlip] = useState(false)
+  
+  const handleAnswer = (userAnswerColor, cardId) => {
+    if(!completed.includes(cardId)){
+      const answer = {id : cardId, color : userAnswerColor}
+      const completedZaps = [...completed, answer]
+      setCompleted(completedZaps)
+      setOpened([])
+    };
+    
+  }
   return (
 
     <Faces>
@@ -14,17 +21,19 @@ export default function CardFaces ({question, answer}) {
         <Question>
           {question}
           <FlipButton 
-            onClick={ () => setIsFlip(true)}>
+            onClick={ () => setIsFlip(true)}
+            data-test="turn-btn"
+            >
             <img src={flipButton} alt={flipButton}/>
           </FlipButton>
         </Question>
       
-        <Answer >
+        <Answer data-test="flashcard-text">
           {answer}
           <ButtonsList>
-            <AnswerButton answerColor = {"#FF3030"} >{"Não lembrei"}</AnswerButton>
-            <AnswerButton answerColor = {"#FF922E"}>{"Quase não lembrei"}</AnswerButton>
-            <AnswerButton answerColor = {"#2FBE34"}>{"Zap!"}</AnswerButton>
+            <AnswerButton data-test="no-btn"  answerColor = {"#FF3030"} onClick= {() => handleAnswer("#FF3030", id)}>{"Não lembrei"}</AnswerButton>
+            <AnswerButton data-test="partial-btn" answerColor = {"#FF922E"} onClick= {() => handleAnswer("#FF922E", id)}>{"Quase não lembrei"}</AnswerButton>
+            <AnswerButton data-test="zap-btn" answerColor = {"#2FBE34"} onClick= {() => handleAnswer("#2FBE34", id)}>{"Zap!"}</AnswerButton>
           </ButtonsList>
         </Answer>
       </CardContent>

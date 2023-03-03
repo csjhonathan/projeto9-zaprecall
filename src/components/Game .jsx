@@ -4,12 +4,12 @@ import FlashCards from "./FlashCards ";
 import themes from "../utils/themes";
 import { useState } from "react";
 export default function Game () {
-  const [completed, setCompleted] = useState(0)
+  const [completed, setCompleted] = useState([]);
   return (
     <StyledGame>
       <Logo src = {gameLogo}/>
-      <FlashCards questions = {themes[0].questions}/>
-      <StyledFooter>{`${completed}/${themes[0].questions.length} CONCLUÍDOS`}</StyledFooter>
+      <FlashCards questions = {themes[0].questions} completed = {completed} setCompleted = {setCompleted}/>
+      <StyledFooter data-test="footer">{`${completed.length}/${themes[0].questions.length} CONCLUÍDOS`}</StyledFooter>
     </StyledGame>
 
   );
