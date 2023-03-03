@@ -30,9 +30,7 @@ export default function CardFaces ({question, answer, id, completed, setComplete
   const handleAnswer = (userAnswerColor, cardId, userAnswer) => {
     if(!completed.includes(cardId)){
       const answer = {id : cardId, color : userAnswerColor, answer : userAnswer, asnwerIcon : icon(userAnswer), test : test(userAnswer) }
-      console.log(answer.test)
       const completedZaps = [...completed, answer]
-      console.log(completedZaps)
       setCompleted(completedZaps)
       setOpened([])
     };

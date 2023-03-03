@@ -4,13 +4,16 @@ import FlashCards from "./FlashCards ";
 import themes from "../utils/themes";
 import { useState } from "react";
 import Trys from "./Trys  ";
+import FinishMessage from "./FinishMessage ";
 export default function Game ({startGame}) {
   const [completed, setCompleted] = useState([]);
+
   return (
     <StyledGame startGame = {startGame}>
       <Logo src = {gameLogo}/>
       <FlashCards questions = {themes[0].questions} completed = {completed} setCompleted = {setCompleted} startGame={startGame}/>
-      <StyledFooter data-test="footer">
+      <StyledFooter data-test="footer" gameIsEnd = {completed.length === 8 && true}>
+        {completed.length===8 && <FinishMessage completed = {completed}/>}
         {`${completed.length}/${themes[0].questions.length} CONCLUÍDOS`}
         <Trys completed = {completed}/>  
       </StyledFooter>
@@ -45,7 +48,7 @@ const StyledFooter = styled.footer`
   bottom: 0;
   left: 0;
   width: 100vw;
-  height: 70px;
+  height: ${({gameIsEnd}) => gameIsEnd ? "171px" : "70px"};
   background: #FFFFFF;
   box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -58,4 +61,5 @@ const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  transition: all .4s;
 `
