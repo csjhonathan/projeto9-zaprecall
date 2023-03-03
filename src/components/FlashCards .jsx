@@ -102,4 +102,5 @@ const StyledText = styled.p`
   font-weight: ${({ opened, cardNumber }) => opened === cardNumber ? "400" : "700"};
   text-decoration: ${({ completed, cardNumber }) => completed.map(answer => answer.id).includes(cardNumber) && "line-through"};
   color : ${({ colorPicker }) => colorPicker};
+  display: ${({ opened, cardNumber }) => opened === cardNumber && "none" };
 `

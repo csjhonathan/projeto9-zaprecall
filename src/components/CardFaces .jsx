@@ -19,7 +19,7 @@ export default function CardFaces ({question, answer, id, completed, setComplete
 
     <Faces>
       <CardContent isFlip = {isFlip}>
-        <Question>
+        <Question data-test="flashcard-text">
           {question}
           <FlipButton 
             onClick={ () => setIsFlip(true)}
